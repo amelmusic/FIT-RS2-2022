@@ -1,4 +1,5 @@
-﻿using eProdaja.Services;
+﻿using eProdaja.Model;
+using eProdaja.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eProdaja.Controllers

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja", "eProdaja.csproj", "{3300213C-D26F-4280-B4F4-4391D0F2B7ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eProdaja", "eProdaja.csproj", "{3300213C-D26F-4280-B4F4-4391D0F2B7ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja.Services", "..\eProdaja.Services\eProdaja.Services.csproj", "{9AA70DEA-52BF-4B03-9070-DF481050EF5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eProdaja.Services", "..\eProdaja.Services\eProdaja.Services.csproj", "{9AA70DEA-52BF-4B03-9070-DF481050EF5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja.Model", "..\eProdaja.Model\eProdaja.Model.csproj", "{0E4688A9-4106-478A-A8EA-19DA4D85C541}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9AA70DEA-52BF-4B03-9070-DF481050EF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AA70DEA-52BF-4B03-9070-DF481050EF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AA70DEA-52BF-4B03-9070-DF481050EF5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4688A9-4106-478A-A8EA-19DA4D85C541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4688A9-4106-478A-A8EA-19DA4D85C541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4688A9-4106-478A-A8EA-19DA4D85C541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4688A9-4106-478A-A8EA-19DA4D85C541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
