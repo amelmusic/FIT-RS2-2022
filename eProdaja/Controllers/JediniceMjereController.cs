@@ -1,30 +1,17 @@
 ﻿using eProdaja.Model;
+using eProdaja.Model.Requests;
+using eProdaja.Model.SearchObjects;
 using eProdaja.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eProdaja.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class JediniceMjereController : ControllerBase
+    
+    public class JediniceMjereController : BaseCRUDController<Model.JediniceMjere, JediniceMjereSearchObject, JediniceMjereUpsertRequest, JediniceMjereUpsertRequest>
     {
-        private readonly IJediniceMjereService _service;
-
-        public JediniceMjereController(IJediniceMjereService proizvodiService)
+        public JediniceMjereController(IJediniceMjereService service)
+            : base(service)
         {
-            _service = proizvodiService;
-        }
-
-        [HttpGet]
-        public IEnumerable<JediniceMjere> Get()
-        {
-            return _service.Get();
-        }
-
-        [HttpGet("{id}")]
-        public JediniceMjere GetById(int id)
-        {
-            return _service.GetById(id);
         }
     }
 }

@@ -21,4 +21,21 @@ SQL Server 2017+
 
     docker pull mcr.microsoft.com/mssql/server:2017-latest
     docker run -e 'ACCEPT_EULA=Y' -e 'QWEasd123!' -p 1434:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+	
+
+EF Scaffolding	
+https://docs.microsoft.com/en-us/ef/core/managing-schemas/scaffolding?tabs=vs
+
+
+* Additional DI
+https://autofac.org/
+
+* Automapper
+
+https://automapper.org/
+
+https://code-maze.com/automapper-net-core/
+
+
+	
 
