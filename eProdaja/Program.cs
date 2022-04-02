@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IProizvodiService, ProizvodiService>();
 builder.Services.AddTransient<IKorisniciService, KorisniciService>();
 builder.Services.AddTransient<IJediniceMjereService, JediniceMjereService>();
+builder.Services.AddTransient<IVrsteProizvodumService, VrsteProizvodumService>();
+
 
 builder.Services.AddAutoMapper(typeof(IKorisniciService));
 //builder.Services.AddSingleton<IProizvodiService, ProizvodiService>();

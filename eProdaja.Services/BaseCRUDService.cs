@@ -16,19 +16,27 @@ namespace eProdaja.Services
         public BaseCRUDService(eProdajaContext context, IMapper mapper)
         :base(context, mapper){}
 
-        public T Insert(TInsert insert)
+        public virtual T Insert(TInsert insert)
         {
             var set = Context.Set<TDb>();
 
             TDb entity = Mapper.Map<TDb>(insert);
 
             set.Add(entity);
+
+            BeforeInsert(insert, entity);
+
             Context.SaveChanges();
 
             return Mapper.Map<T>(entity);
         }
 
-        public T Update(int id, TUpdate update)
+        public virtual void BeforeInsert(TInsert insert, TDb entity)
+        {
+
+        }
+
+        public virtual T Update(int id, TUpdate update)
         {
             var set = Context.Set<TDb>();
 

@@ -13,6 +13,10 @@ namespace eProdaja.Services
         public MappingProfile()
         {
             CreateMap<Database.Korisnici, Model.Korisnici>();
+
+            CreateMap<KorisniciInsertRequest, Database.Korisnici>();
+            CreateMap<KorisniciUpdateRequest, Database.Korisnici>();
+
             CreateMap<Database.Proizvodi, Model.Proizvodi>();
             CreateMap<Database.JediniceMjere, Model.JediniceMjere>();
 
@@ -20,6 +24,10 @@ namespace eProdaja.Services
 
             CreateMap<ProizvodiInsertRequest, Database.Proizvodi>();
             CreateMap<ProizvodiUpdateRequest, Database.Proizvodi>();
+
+
+            CreateMap<Database.VrsteProizvodum, Model.VrsteProizvodum>();
+            CreateMap<VrsteProizvodumUpsertRequest, Database.VrsteProizvodum>();
         }
     }
 }

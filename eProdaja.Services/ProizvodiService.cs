@@ -3,6 +3,7 @@ using eProdaja.Model;
 using eProdaja.Model.Requests;
 using eProdaja.Model.SearchObjects;
 using eProdaja.Services.Database;
+using eProdaja.Services.ProductStateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,41 @@ namespace eProdaja.Services
         {
 
         }
+
+        public override Model.Proizvodi Insert(ProizvodiInsertRequest insert)
+        {
+            //return base.Insert(insert);
+            var state = BaseState.CreateState("initial");
+            state.Context = Context;
+            return state.Insert(insert);
+        }
+
+        public override Model.Proizvodi Update(int id, ProizvodiUpdateRequest update)
+        {
+            var product = Context.Proizvodis.Find(id);
+            //return base.Update(id, update);
+            var state = BaseState.CreateState(product.StateMachine);
+            state.Context = Context;
+            state.CurrentEntity = product;
+
+            state.Update(update);
+
+            return GetById(id);
+        }
+
+        public Model.Proizvodi Activate(int id)
+        {
+            var product = Context.Proizvodis.Find(id);
+            //return base.Update(id, update);
+            var state = BaseState.CreateState(product.StateMachine);
+            state.Context = Context;
+            state.CurrentEntity = product;
+
+            state.Activate();
+
+            return GetById(id);
+        }
+
 
 
         //public override IEnumerable<Model.Proizvodi> Get(ProizvodiSearchObject search = null)
@@ -47,6 +83,8 @@ namespace eProdaja.Services
 
             return filteredQuery;
         }
+
+
 
         //public IEnumerable<Model.Proizvodi> Get(ProizvodiSearchObject search)
         //{
