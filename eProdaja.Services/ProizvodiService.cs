@@ -14,17 +14,18 @@ namespace eProdaja.Services
 {
     public class ProizvodiService : BaseCRUDService<Model.Proizvodi, Database.Proizvodi, ProizvodiSearchObject, ProizvodiInsertRequest, ProizvodiUpdateRequest>, IProizvodiService
     {
-        public ProizvodiService(eProdajaContext context, IMapper mapper)
+        public BaseState BaseState { get; set; }
+        public ProizvodiService(eProdajaContext context, IMapper mapper, BaseState baseState)
             : base(context, mapper)
         {
-
+            BaseState = baseState;
         }
 
         public override Model.Proizvodi Insert(ProizvodiInsertRequest insert)
         {
             //return base.Insert(insert);
             var state = BaseState.CreateState("initial");
-            state.Context = Context;
+           
             return state.Insert(insert);
         }
 
@@ -33,7 +34,6 @@ namespace eProdaja.Services
             var product = Context.Proizvodis.Find(id);
             //return base.Update(id, update);
             var state = BaseState.CreateState(product.StateMachine);
-            state.Context = Context;
             state.CurrentEntity = product;
 
             state.Update(update);
@@ -46,7 +46,6 @@ namespace eProdaja.Services
             var product = Context.Proizvodis.Find(id);
             //return base.Update(id, update);
             var state = BaseState.CreateState(product.StateMachine);
-            state.Context = Context;
             state.CurrentEntity = product;
 
             state.Activate();
@@ -54,7 +53,13 @@ namespace eProdaja.Services
             return GetById(id);
         }
 
+        public List<string> AllowedActions(int id)
+        {
+            var product = GetById(id);
+            var state = BaseState.CreateState(product.StateMachine);
 
+            return state.AllowedActions();
+        }
 
         //public override IEnumerable<Model.Proizvodi> Get(ProizvodiSearchObject search = null)
         //{
@@ -83,6 +88,8 @@ namespace eProdaja.Services
 
             return filteredQuery;
         }
+
+      
 
 
 

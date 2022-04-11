@@ -49,11 +49,12 @@ namespace eProdaja.Services
 
         public static string GenerateSalt()
         {
-            return Convert.ToBase64String(new byte[16]);
+            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            var byteArray = new byte[16];
+            provider.GetBytes(byteArray);
 
-            //var buf = new byte[16];
-            //object p = (new RSACryptoServiceProvider()).GetBytes(buf);
-            //return Convert.ToBase64String(buf);
+
+            return Convert.ToBase64String(byteArray);
         }
         public static string GenerateHash(string salt, string password)
         {
