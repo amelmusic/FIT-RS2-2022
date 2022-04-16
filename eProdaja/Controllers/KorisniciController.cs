@@ -2,6 +2,7 @@
 using eProdaja.Model.Requests;
 using eProdaja.Model.SearchObjects;
 using eProdaja.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eProdaja.Controllers
@@ -13,6 +14,18 @@ namespace eProdaja.Controllers
         public KorisniciController(IKorisniciService service)
             :base(service)
         {
+        }
+
+        [Authorize("Administrator")]
+        public override Korisnici Insert([FromBody] KorisniciInsertRequest insert)
+        {
+            return base.Insert(insert);
+        }
+
+        [Authorize("Administrator")]
+        public override Korisnici Update(int id, [FromBody] KorisniciUpdateRequest update)
+        {
+            return base.Update(id, update);
         }
 
     }

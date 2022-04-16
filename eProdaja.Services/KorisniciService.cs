@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 
 namespace eProdaja.Services
 {
@@ -68,6 +69,43 @@ namespace eProdaja.Services
             HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
+        }
+
+        public override IQueryable<Korisnici> AddFilter(IQueryable<Korisnici> query, KorisniciSearchObject search = null)
+        {
+            var filteredQuery = base.AddFilter(query, search);
+
+            if (!string.IsNullOrWhiteSpace(search?.KorisnickoIme))
+            {
+                filteredQuery = filteredQuery.Where(x => x.KorisnickoIme == search.KorisnickoIme);
+            }
+
+            if (!string.IsNullOrWhiteSpace(search?.NameFTS))
+            {
+                filteredQuery = filteredQuery.Where(x => x.KorisnickoIme.Contains(search.NameFTS) 
+                    || x.Ime.Contains(search.NameFTS)
+                    || x.Prezime.Contains(search.NameFTS));
+            }
+
+            return filteredQuery;
+        }
+
+        public Model.Korisnici Login(string username, string password)
+        {
+            var entity = Context.Korisnicis.Include("KorisniciUloges.Uloga").FirstOrDefault(x => x.KorisnickoIme == username);
+            if (entity == null)
+            {
+                return null;
+            }
+
+            var hash = GenerateHash(entity.LozinkaSalt, password);
+
+            if (hash != entity.LozinkaHash)
+            {
+                return null;
+            }
+
+            return Mapper.Map<Model.Korisnici>(entity);
         }
     }
 }

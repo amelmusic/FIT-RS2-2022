@@ -9,7 +9,7 @@ namespace eProdaja.WinUI
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmProductList());
+            Application.Run(new frmLogin());
         }
     }
 }
