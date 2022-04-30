@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
+using eProdaja.Model;
 
 namespace eProdaja.Services
 {
@@ -21,6 +22,12 @@ namespace eProdaja.Services
 
         public override Model.Korisnici Insert(KorisniciInsertRequest insert)
         {
+
+            if (insert.Password != insert.PasswordPotvrda)
+            {
+                throw new UserException("Password and confirmation must be the same");
+            }
+
             var entity = base.Insert(insert);
 
             
@@ -39,7 +46,7 @@ namespace eProdaja.Services
             return entity;
         }
 
-        public override void BeforeInsert(KorisniciInsertRequest insert, Korisnici entity)
+        public override void BeforeInsert(KorisniciInsertRequest insert, Database.Korisnici entity)
         {
             var salt = GenerateSalt();
             entity.LozinkaSalt = salt;
@@ -71,7 +78,7 @@ namespace eProdaja.Services
             return Convert.ToBase64String(inArray);
         }
 
-        public override IQueryable<Korisnici> AddFilter(IQueryable<Korisnici> query, KorisniciSearchObject search = null)
+        public override IQueryable<Database.Korisnici> AddFilter(IQueryable<Database.Korisnici> query, KorisniciSearchObject search = null)
         {
             var filteredQuery = base.AddFilter(query, search);
 
@@ -88,6 +95,15 @@ namespace eProdaja.Services
             }
 
             return filteredQuery;
+        }
+
+        public override IQueryable<Database.Korisnici> AddInclude(IQueryable<Database.Korisnici> query, KorisniciSearchObject search = null)
+        {
+            if (search?.IncludeRoles == true)
+            {
+                 query = query.Include("KorisniciUloges.Uloga");
+            }
+            return query;
         }
 
         public Model.Korisnici Login(string username, string password)

@@ -11,5 +11,7 @@ namespace eProdaja.Model.SearchObjects
 
         public string Email { get; set; }
 
+        public bool IncludeRoles { get; set; }
+
     }
 }

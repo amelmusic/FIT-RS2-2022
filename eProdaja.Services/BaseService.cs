@@ -25,6 +25,8 @@ namespace eProdaja.Services
 
             entity = AddFilter(entity, search);
 
+            entity = AddInclude(entity, search);
+
             if(search?.Page.HasValue == true && search?.PageSize.HasValue == true)
             {
                 entity = entity.Take(search.PageSize.Value).Skip(search.Page.Value * search.PageSize.Value);
@@ -33,6 +35,11 @@ namespace eProdaja.Services
             var list = entity.ToList();
             //NOTE: elaborate IEnumerable vs IList
             return Mapper.Map<IList<T>>(list);
+        }
+
+        public virtual IQueryable<TDb> AddInclude(IQueryable<TDb> query, TSearch search = null)
+        {
+            return query;
         }
 
         public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query, TSearch search = null)

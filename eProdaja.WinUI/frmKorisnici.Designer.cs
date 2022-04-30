@@ -29,23 +29,69 @@
         private void InitializeComponent()
         {
             this.dgvKorisinici = new System.Windows.Forms.DataGridView();
+            this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RoleNames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnShow = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKorisinici)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvKorisinici
             // 
             this.dgvKorisinici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKorisinici.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Ime,
+            this.Prezime,
+            this.RoleNames,
+            this.Status});
             this.dgvKorisinici.Location = new System.Drawing.Point(12, 112);
+            this.dgvKorisinici.MultiSelect = false;
             this.dgvKorisinici.Name = "dgvKorisinici";
             this.dgvKorisinici.RowHeadersWidth = 51;
             this.dgvKorisinici.RowTemplate.Height = 29;
+            this.dgvKorisinici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKorisinici.Size = new System.Drawing.Size(776, 326);
             this.dgvKorisinici.TabIndex = 0;
+            this.dgvKorisinici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKorisinici_CellDoubleClick);
+            // 
+            // Ime
+            // 
+            this.Ime.DataPropertyName = "Ime";
+            this.Ime.HeaderText = "Ime";
+            this.Ime.MinimumWidth = 6;
+            this.Ime.Name = "Ime";
+            this.Ime.Width = 125;
+            // 
+            // Prezime
+            // 
+            this.Prezime.DataPropertyName = "Prezime";
+            this.Prezime.HeaderText = "Prezime korisnika";
+            this.Prezime.MinimumWidth = 6;
+            this.Prezime.Name = "Prezime";
+            this.Prezime.Width = 125;
+            // 
+            // RoleNames
+            // 
+            this.RoleNames.DataPropertyName = "RoleNames";
+            this.RoleNames.HeaderText = "Uloge";
+            this.RoleNames.MinimumWidth = 6;
+            this.RoleNames.Name = "RoleNames";
+            this.RoleNames.Width = 125;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.Width = 125;
             // 
             // btnShow
             // 
@@ -89,6 +135,12 @@
             this.txtName.Size = new System.Drawing.Size(234, 27);
             this.txtName.TabIndex = 4;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            // 
             // frmKorisnici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -104,6 +156,7 @@
             this.Text = "frmKorisnici";
             this.Load += new System.EventHandler(this.frmKorisnici_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKorisinici)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +170,10 @@
         private Label label1;
         private Label label2;
         private TextBox txtName;
+        private DataGridViewTextBoxColumn Ime;
+        private DataGridViewTextBoxColumn Prezime;
+        private DataGridViewTextBoxColumn RoleNames;
+        private DataGridViewCheckBoxColumn Status;
+        private FileSystemWatcher fileSystemWatcher1;
     }
 }

@@ -19,6 +19,7 @@ namespace eProdaja.WinUI
         public frmKorisnici()
         {
             InitializeComponent();
+            dgvKorisinici.AutoGenerateColumns = false;
         }
 
         private void frmKorisnici_Load(object sender, EventArgs e)
@@ -31,10 +32,24 @@ namespace eProdaja.WinUI
             var searchObject = new KorisniciSearchObject();
             searchObject.KorisnickoIme = txtUsername.Text;
             searchObject.NameFTS = txtName.Text;
+            searchObject.IncludeRoles = true;
 
             var list = await KorisinciService.Get<List<Korisnici>>(searchObject);
 
             dgvKorisinici.DataSource = list;
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+
+        }
+
+        private void dgvKorisinici_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var item = dgvKorisinici.SelectedRows[0].DataBoundItem as Korisnici;
+
+            frmKorisniciDetails frm = new frmKorisniciDetails(item);
+            frm.ShowDialog();
         }
     }
 }
