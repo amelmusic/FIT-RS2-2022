@@ -39,3 +39,14 @@ https://code-maze.com/automapper-net-core/
 
 	
 
+Usefull docker commands:
+
+docker build -t eprodaja-api .
+
+docker run -p 5192:5192 --name eprodaja-api-container eprodaja-api
+
+
+docker image rm eprodaja-api --force
+
+
+docker-compose up --build

@@ -14,5 +14,7 @@ namespace eProdaja.Services
     {
         Model.Proizvodi Activate(int id);
         List<string> AllowedActions(int id);
+
+        List<Model.Proizvodi> Recommend(int id);
     }
 }

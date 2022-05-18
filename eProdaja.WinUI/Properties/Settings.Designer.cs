@@ -25,10 +25,22 @@ namespace eProdaja.WinUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ttt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7192/")]
         public string ApiURL {
             get {
                 return ((string)(this["ApiURL"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dsad {
+            get {
+                return ((string)(this["dsad"]));
+            }
+            set {
+                this["dsad"] = value;
             }
         }
     }

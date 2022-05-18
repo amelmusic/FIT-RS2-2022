@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="ApiURL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ttt</Value>
+      <Value Profile="(Default)">https://localhost:7192/</Value>
+    </Setting>
+    <Setting Name="dsad" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
