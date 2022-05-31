@@ -1,9 +1,22 @@
+import 'package:eprodajamobile/providers/product_provider.dart';
+import 'package:eprodajamobile/screens/products/product_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MaterialApp(
+void main() => runApp(MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (_) => ProductProvider()),
+  ],
+  child: MaterialApp(
       debugShowCheckedModeBanner: true,
       home: HomePage(),
-    ));
+      onGenerateRoute: (settings) {
+        if (settings.name == ProductListScreen.routeName) {
+          return MaterialPageRoute(builder: ((context) => ProductListScreen()));
+        }
+      },
+    ),
+));
 
 class HomePage extends StatelessWidget {
   @override
@@ -89,7 +102,12 @@ class HomePage extends StatelessWidget {
                     ),
                     
                   ),
-                  child: Center(child: Text("Login")),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, ProductListScreen.routeName);
+                    },
+                    child: Center(child: Text("Login")),
+                  ),
                 ),
           SizedBox(height: 40,),
           Text("Forgot password?"),
