@@ -3,6 +3,7 @@ import 'package:eprodajamobile/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/product.dart';
@@ -19,6 +20,7 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
   List<Product> data = [];
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -48,6 +50,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
+              _buildProductSearch(),
               Container(
                 height: 200,
                 child: GridView(
@@ -75,6 +78,46 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 
+  Widget _buildProductSearch() {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextField(
+              controller: _searchController,
+              onSubmitted: (value) async {
+                var tmpData = await _productProvider?.get({'naziv': value});
+                setState(() {
+                  data = tmpData!;
+                });
+              },
+              decoration: InputDecoration(
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey))),
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () async {
+                var tmpData = await _productProvider?.get({'naziv': _searchController.text});
+                setState(() {
+                  data = tmpData!;
+                });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+
   List<Widget> _buildProductCardList() {
     if (data.length == 0) {
       return [Text("Loading...")];
@@ -90,7 +133,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     width: 100,
                     child: imageFromBase64String(x.slika!),
                   ),
-                  Text(x.naziv ?? "")
+                  Text(x.naziv ?? ""),
+                  Text(formatNumber(x.cijena)),
                 ],
               ),
             ))

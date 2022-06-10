@@ -18,3 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ROUTING:
 https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade
+
+
+CODE GEN:
+https://pub.dev/packages/json_serializable

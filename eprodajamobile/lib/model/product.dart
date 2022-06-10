@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
@@ -8,6 +10,8 @@ class Product {
   int? proizvodId;
   String? naziv;
   String? slika;
+  double? cijena;
+
 
   Product(){}
 
