@@ -1,4 +1,8 @@
+import 'package:eprodajamobile/providers/cart_provider.dart';
+import 'package:eprodajamobile/providers/order_provider.dart';
 import 'package:eprodajamobile/providers/product_provider.dart';
+import 'package:eprodajamobile/screens/cart/cart_screen.dart';
+import 'package:eprodajamobile/screens/products/product_details_screen.dart';
 import 'package:eprodajamobile/screens/products/product_list_screen.dart';
 import 'package:eprodajamobile/utils/util.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +14,8 @@ void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
@@ -19,7 +25,7 @@ void main() => runApp(MultiProvider(
           primaryColor: Colors.deepPurple,
           textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                    primary: Colors.yellow,
+                    primary: Colors.deepPurple,
                     textStyle: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -38,7 +44,18 @@ void main() => runApp(MultiProvider(
           if (settings.name == ProductListScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => ProductListScreen()));
+          } else if (settings.name == CartScreen.routeName) {
+            return MaterialPageRoute(
+                builder: ((context) => CartScreen()));
           }
+
+          var uri = Uri.parse(settings.name!);
+          if (uri.pathSegments.length == 2 &&
+              "/${uri.pathSegments.first}" == ProductDetailsScreen.routeName) {
+            var id = uri.pathSegments[1];
+            return MaterialPageRoute(builder: (context) => ProductDetailsScreen(id));
+          }
+
         },
       ),
     ));

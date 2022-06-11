@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
-  static String? _endpoint;
+  String? _endpoint;
 
   HttpClient client = new HttpClient();
   IOClient? http;
@@ -69,9 +69,9 @@ abstract class BaseProvider<T> with ChangeNotifier {
     var uri = Uri.parse(url);
 
     Map<String, String> headers = createHeaders();
-
+    var jsonRequest = jsonEncode(request);
     var response =
-        await http!.post(uri, headers: headers, body: jsonEncode(request));
+        await http!.post(uri, headers: headers, body: jsonRequest);
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);

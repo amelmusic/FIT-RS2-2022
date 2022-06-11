@@ -31,6 +31,11 @@ namespace eProdaja.Services
 
             CreateMap<Database.VrsteProizvodum, Model.VrsteProizvodum>();
             CreateMap<VrsteProizvodumUpsertRequest, Database.VrsteProizvodum>();
+
+
+            CreateMap<Database.Narudzbe, Model.Narudzbe>();
+            CreateMap<NarudzbaInsertRequest, Database.Narudzbe>();
+            CreateMap<NarudzbaUpdateRequest, Database.Narudzbe>();
         }
     }
 }

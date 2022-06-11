@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:eprodajamobile/model/cart.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,7 +8,7 @@ class CartProvider with ChangeNotifier {
   Cart cart = Cart();
   addToCart(Product product) {
     if (findInCart(product) != null) {
-      findInCart(product).count++;
+      findInCart(product)?.count++;
     } else {
       cart.items.add(CartItem(product, 1));
     }
@@ -20,7 +21,8 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  findInCart(Product product) {
-    return cart.items.firstWhere((item) => item.product.proizvodId == product.proizvodId);
+  CartItem? findInCart(Product product) {
+    CartItem? item = cart.items.firstWhereOrNull((item) => item.product.proizvodId == product.proizvodId);
+    return item;
   }
 }
