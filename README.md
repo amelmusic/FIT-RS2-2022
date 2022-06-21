@@ -26,6 +26,7 @@ SQL Server 2017+
 EF Scaffolding	
 https://docs.microsoft.com/en-us/ef/core/managing-schemas/scaffolding?tabs=vs
 
+for migrations since it's a multiple projects solution, make sure that you select "eProdaja.Services" project in nuget package manager console and set startup project in solution (right click) "eProdaja"
 
 * Additional DI
 https://autofac.org/

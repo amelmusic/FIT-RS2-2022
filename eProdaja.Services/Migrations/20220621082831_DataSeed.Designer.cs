@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eProdaja.Services.Database;
 
@@ -11,9 +12,10 @@ using eProdaja.Services.Database;
 namespace eProdaja.Services.Migrations
 {
     [DbContext(typeof(eProdajaContext))]
-    partial class eProdajaContextModelSnapshot : ModelSnapshot
+    [Migration("20220621082831_DataSeed")]
+    partial class DataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

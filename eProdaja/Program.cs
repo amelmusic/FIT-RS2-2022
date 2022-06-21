@@ -83,7 +83,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<eProdajaContext>();
-    //dataContext.Database.Migrate();
+    dataContext.Database.Migrate();
 }
 
 app.Run();
